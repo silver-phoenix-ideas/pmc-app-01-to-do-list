@@ -1,8 +1,7 @@
 prompt = "Enter to do item: "
-user_input1 = input(prompt)
-user_input2 = input(prompt)
-user_input3 = input(prompt)
+todo_list = []
 
-todos = [user_input1, user_input2, user_input3]
-
-print(type(todos), todos)
+while True:
+    user_input = input(prompt)
+    todo_list.append(user_input.title())
+    print(todo_list)
