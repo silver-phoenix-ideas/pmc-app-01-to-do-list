@@ -1,4 +1,4 @@
-prompt = "Type add, show, edit or exit: "
+prompt = "Type add, show, edit, complete or exit: "
 todo_list = []
 
 while True:
@@ -9,12 +9,15 @@ while True:
             todo_item = input("Enter to do item: ")
             todo_list.append(todo_item.strip().title())
         case "show":
-            for todo_item in todo_list:
-                print("-", todo_item)
+            for index, todo_item in enumerate(todo_list, start=1):
+                print(index, "-", todo_item)
         case "edit":
             index = int(input("Which item do you want to edit? ")) - 1
             todo_item = input("Enter new to do item: ")
             todo_list[index] = todo_item.strip().title()
+        case "complete":
+            index = int(input("Which item do you want to complete? ")) - 1
+            todo_list.pop(index)
         case "exit":
             print("Bye!")
             break
