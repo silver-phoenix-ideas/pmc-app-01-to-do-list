@@ -1,5 +1,9 @@
 prompt = "Type add, show, edit, complete or exit: "
-todo_list = []
+filename = "to_do_list.txt"
+
+file = open(filename)
+todo_list = file.read().split("\n")
+file.close()
 
 while True:
     user_action = input(prompt).strip().casefold()
@@ -7,7 +11,12 @@ while True:
     match user_action:
         case "add":
             todo_item = input("Enter to do item: ")
-            todo_list.append(todo_item.strip().title())
+            todo_item = todo_item.strip().title()
+            todo_list.append(todo_item)
+
+            file = open(filename, 'w')
+            file.write("\n".join(todo_list))
+            file.close()
         case "show":
             for index, todo_item in enumerate(todo_list, start=1):
                 print(index, "-", todo_item)
