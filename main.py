@@ -16,24 +16,34 @@ with open(filename) as file:
     todo_list = file.read().split("\n")
 
 while True:
-    user_action = input(txt_action_prompt + " ")
-    user_action = user_action.strip().casefold()
+    user_input = input(txt_action_prompt + " ")
+    user_input = user_input.strip().partition(" ")
+
+    user_action = user_input[0].casefold()
+    user_data = user_input[2]
 
     match user_action:
         case "add":
-            todo_item = input(txt_add_prompt + " ")
+            todo_item = user_data if user_data else input(txt_add_prompt + " ")
             todo_item = todo_item.strip().title()
+
             todo_list.append(todo_item)
 
             with open(filename, 'w') as file:
                 file.write("\n".join(todo_list))
 
         case "show":
+            if user_data:
+                print(txt_action_error)
+                continue
+
             for index, todo_item in enumerate(todo_list, start=1):
                 print(index, "-", todo_item)
 
         case "edit":
-            index = int(input(txt_edit_prompt_index + " ")) - 1
+            index = user_data if user_data else input(txt_edit_prompt_index + " ")
+            index = int(index) - 1
+
             todo_item = input(txt_edit_prompt_value + " ")
             todo_list[index] = todo_item.strip().title()
 
@@ -41,7 +51,9 @@ while True:
                 file.write("\n".join(todo_list))
 
         case "complete":
-            index = int(input(txt_complete_prompt + " ")) - 1
+            index = user_data if user_data else input(txt_complete_prompt + " ")
+            index = int(index) - 1
+
             todo_item = todo_list.pop(index)
             print(txt_complete_success.format(todo_item))
 
@@ -49,7 +61,11 @@ while True:
                 file.write("\n".join(todo_list))
 
         case "exit":
-            print("Bye!")
+            if user_data:
+                print(txt_action_error)
+                continue
+
+            print(txt_exit)
             break
 
         case _:
