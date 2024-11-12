@@ -4,7 +4,6 @@ filename = "to_do_list.txt"
 
 # Localization
 txt_action_prompt = "Type add, show, edit, complete or exit:"
-txt_action_error = "Unknown command."
 txt_add_prompt = "Enter new item:"
 txt_add_success = 'Item "{0}" has been added.'
 txt_edit_prompt_index = "Which item do you want to edit?"
@@ -13,15 +12,22 @@ txt_edit_success = 'Item "{0}" has been replaced by "{1}".'
 txt_complete_prompt = "Which item do you want to complete?"
 txt_complete_success = 'Item "{0}" has been removed.'
 txt_exit = "To do list has been saved. Bye!"
+txt_error_invalid_action = "Unknown command."
+txt_error_empty_string = "You entered an empty string."
+txt_error_not_number = 'The value "{0}" is not a number.'
+txt_error_not_item = 'There\'s no item with number "{0}" in the list.'
 
 # Logic
-print("\n" + app_title)
+try:
+    with open(filename) as file:
+        todo_list = file.read().split("\n")
 
-with open(filename) as file:
-    todo_list = file.read().split("\n")
+    print("\n" + app_title)
 
-for index, todo_item in enumerate(todo_list, start=1):
-    print(index, "-", todo_item)
+    for index, todo_item in enumerate(todo_list, start=1):
+        print(index, "-", todo_item)
+except FileNotFoundError:
+    todo_list = []
 
 while True:
     print()
@@ -36,6 +42,10 @@ while True:
             todo_item = user_data if user_data else input(txt_add_prompt + " ")
             todo_item = todo_item.strip().title()
 
+            if not todo_item:
+                print(txt_error_empty_string)
+                continue
+
             todo_list.append(todo_item)
 
             with open(filename, 'w') as file:
@@ -45,7 +55,7 @@ while True:
 
         case "show":
             if user_data:
-                print(txt_action_error)
+                print(txt_error_invalid_action)
                 continue
 
             for index, todo_item in enumerate(todo_list, start=1):
@@ -53,12 +63,27 @@ while True:
 
         case "edit":
             index = user_data if user_data else input(txt_edit_prompt_index + " ")
-            index = int(index) - 1
 
-            old_item = todo_list[index]
+            try:
+                index = int(index) - 1
+            except ValueError:
+                print(txt_error_not_number.format(index))
+                continue
+
+            try:
+                old_item = todo_list[index]
+            except IndexError:
+                print(txt_error_not_item.format(index + 1))
+                continue
 
             todo_item = input(txt_edit_prompt_value + " ")
-            todo_list[index] = todo_item.strip().title()
+            todo_item = todo_item.strip().title()
+
+            if not todo_item:
+                print(txt_error_empty_string)
+                continue
+
+            todo_list[index] = todo_item
 
             new_item = todo_list[index]
 
@@ -69,9 +94,18 @@ while True:
 
         case "complete":
             index = user_data if user_data else input(txt_complete_prompt + " ")
-            index = int(index) - 1
 
-            todo_item = todo_list.pop(index)
+            try:
+                index = int(index) - 1
+            except ValueError:
+                print(txt_error_not_number.format(index))
+                continue
+
+            try:
+                todo_item = todo_list.pop(index)
+            except IndexError:
+                print(txt_error_not_item.format(index + 1))
+                continue
 
             with open(filename, 'w') as file:
                 file.write("\n".join(todo_list))
@@ -80,11 +114,11 @@ while True:
 
         case "exit":
             if user_data:
-                print(txt_action_error)
+                print(txt_error_invalid_action)
                 continue
 
             print(txt_exit)
             break
 
         case _:
-            print(txt_action_error)
+            print(txt_error_invalid_action)
