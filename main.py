@@ -17,15 +17,28 @@ txt_error_empty_string = "You entered an empty string."
 txt_error_not_number = 'The value "{0}" is not a number.'
 txt_error_not_item = 'There\'s no item with number "{0}" in the list.'
 
+
 # Logic
-try:
+def open_file():
     with open(filename) as file:
         todo_list = file.read().split("\n")
+    return todo_list
 
-    print("\n" + app_title)
 
+def save_file():
+    with open(filename, 'w') as file:
+        file.write("\n".join(todo_list))
+
+
+def display_list():
     for index, todo_item in enumerate(todo_list, start=1):
         print(index, "-", todo_item)
+
+
+try:
+    todo_list = open_file()
+    print("\n" + app_title)
+    display_list()
 except FileNotFoundError:
     todo_list = []
 
@@ -48,8 +61,7 @@ while True:
 
             todo_list.append(todo_item)
 
-            with open(filename, 'w') as file:
-                file.write("\n".join(todo_list))
+            save_file()
 
             print(txt_add_success.format(todo_item))
 
@@ -58,8 +70,7 @@ while True:
                 print(txt_error_invalid_action)
                 continue
 
-            for index, todo_item in enumerate(todo_list, start=1):
-                print(index, "-", todo_item)
+            display_list()
 
         case "edit":
             index = user_data if user_data else input(txt_edit_prompt_index + " ")
@@ -87,8 +98,7 @@ while True:
 
             new_item = todo_list[index]
 
-            with open(filename, 'w') as file:
-                file.write("\n".join(todo_list))
+            save_file()
 
             print(txt_edit_success.format(old_item, new_item))
 
@@ -107,8 +117,7 @@ while True:
                 print(txt_error_not_item.format(index + 1))
                 continue
 
-            with open(filename, 'w') as file:
-                file.write("\n".join(todo_list))
+            save_file()
 
             print(txt_complete_success.format(todo_item))
 
