@@ -19,26 +19,26 @@ txt_error_not_item = 'There\'s no item with number "{0}" in the list.'
 
 
 # Logic
-def open_file():
+def open_file(filename):
     with open(filename) as file:
         todo_list = file.read().split("\n")
     return todo_list
 
 
-def save_file():
+def save_file(filename, todo_list):
     with open(filename, 'w') as file:
         file.write("\n".join(todo_list))
 
 
-def display_list():
+def display_list(todo_list):
     for index, todo_item in enumerate(todo_list, start=1):
         print(index, "-", todo_item)
 
 
 try:
-    todo_list = open_file()
+    todo_list = open_file(filename)
     print("\n" + app_title)
-    display_list()
+    display_list(todo_list)
 except FileNotFoundError:
     todo_list = []
 
@@ -61,7 +61,7 @@ while True:
 
             todo_list.append(todo_item)
 
-            save_file()
+            save_file(filename, todo_list)
 
             print(txt_add_success.format(todo_item))
 
@@ -70,7 +70,7 @@ while True:
                 print(txt_error_invalid_action)
                 continue
 
-            display_list()
+            display_list(todo_list)
 
         case "edit":
             index = user_data if user_data else input(txt_edit_prompt_index + " ")
@@ -98,7 +98,7 @@ while True:
 
             new_item = todo_list[index]
 
-            save_file()
+            save_file(filename, todo_list)
 
             print(txt_edit_success.format(old_item, new_item))
 
@@ -117,7 +117,7 @@ while True:
                 print(txt_error_not_item.format(index + 1))
                 continue
 
-            save_file()
+            save_file(filename, todo_list)
 
             print(txt_complete_success.format(todo_item))
 
