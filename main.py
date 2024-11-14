@@ -1,6 +1,8 @@
+# Imports
+from modules.functions import get_todo_list, save_todo_list, display_todo_list
+
 # Configuration
 app_title = "To Do List"
-filename = "to_do_list.txt"
 
 # Localization
 txt_action_prompt = "Type add, show, edit, complete or exit:"
@@ -17,27 +19,7 @@ txt_error_empty_string = "You entered an empty string."
 txt_error_not_number = 'The value "{0}" is not a number.'
 txt_error_not_item = 'There\'s no item with number "{0}" in the list.'
 
-
 # Logic
-def get_todo_list(filename=filename):
-    """ Reads the contents of a text file and returns a to-do list. """
-    with open(filename) as file:
-        todo_list = file.read().split("\n")
-    return todo_list
-
-
-def save_todo_list(todo_list, filename=filename):
-    """ Saves the contents of a to-do list in a text file. """
-    with open(filename, 'w') as file:
-        file.write("\n".join(todo_list))
-
-
-def display_todo_list(todo_list):
-    """ Prints out to-do list items and their numbers in the console. """
-    for index, todo_item in enumerate(todo_list, start=1):
-        print(index, "-", todo_item)
-
-
 try:
     todo_list = get_todo_list()
     print("\n" + app_title)
