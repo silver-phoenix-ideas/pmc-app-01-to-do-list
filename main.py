@@ -1,4 +1,5 @@
 # Imports
+import time
 from modules.functions import get_todo_list, save_todo_list, display_todo_list
 
 # Configuration
@@ -20,6 +21,8 @@ txt_error_not_number = 'The value "{0}" is not a number.'
 txt_error_not_item = 'There\'s no item with number "{0}" in the list.'
 
 # Logic
+print("\n" + time.strftime("%A, %B %d %Y"))
+
 try:
     todo_list = get_todo_list()
     print("\n" + app_title)
