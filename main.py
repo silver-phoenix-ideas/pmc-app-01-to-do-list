@@ -69,12 +69,11 @@ while True:
                 print(txt_error_not_number.format(index))
                 continue
 
-            try:
-                old_item = todo_list[index]
-            except IndexError:
+            if index < 0 or index > len(todo_list):
                 print(txt_error_not_item.format(index + 1))
                 continue
 
+            old_item = todo_list[index]
             todo_item = input(txt_edit_prompt_value + " ")
             todo_item = todo_item.strip().title()
 
@@ -99,11 +98,11 @@ while True:
                 print(txt_error_not_number.format(index))
                 continue
 
-            try:
-                todo_item = todo_list.pop(index)
-            except IndexError:
+            if index < 0 or index > len(todo_list):
                 print(txt_error_not_item.format(index + 1))
                 continue
+
+            todo_item = todo_list.pop(index)
 
             save_todo_list(todo_list)
 
