@@ -19,3 +19,10 @@ def display_todo_list(todo_list):
     """ Prints out to-do list items and their numbers in the console. """
     for index, todo_item in enumerate(todo_list, start=1):
         print(index, "-", todo_item)
+
+
+if __name__ == "__main__":
+    print("Functions Module:")
+    help(get_todo_list)
+    help(save_todo_list)
+    help(display_todo_list)
