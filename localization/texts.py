@@ -1,5 +1,6 @@
 app_title = "To Do List"
 action_prompt = "Type add, show, edit, complete or exit:"
+add_button = "Add"
 add_prompt = "Enter new item:"
 add_success = 'Item "{0}" has been added.'
 edit_prompt_index = "Which item do you want to edit?"
