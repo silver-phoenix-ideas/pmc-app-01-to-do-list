@@ -1,15 +1,15 @@
 # Configuration
-filename = "to_do_list.txt"
+FILENAME = "to_do_list.txt"
 
 
-def get_todo_list(filename=filename):
+def get_todo_list(filename=FILENAME):
     """ Reads the contents of a text file and returns a to-do list. """
     with open(filename) as file:
         todo_list = file.read().split("\n")
     return todo_list
 
 
-def save_todo_list(todo_list, filename=filename):
+def save_todo_list(todo_list, filename=FILENAME):
     """ Saves the contents of a to-do list in a text file. """
     with open(filename, 'w') as file:
         file.write("\n".join(todo_list))
