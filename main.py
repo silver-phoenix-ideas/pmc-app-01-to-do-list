@@ -1,38 +1,21 @@
 # Imports
 import time
+import localization.texts as txt
 from modules.functions import get_todo_list, save_todo_list, display_todo_list
-
-# Configuration
-app_title = "To Do List"
-
-# Localization
-txt_action_prompt = "Type add, show, edit, complete or exit:"
-txt_add_prompt = "Enter new item:"
-txt_add_success = 'Item "{0}" has been added.'
-txt_edit_prompt_index = "Which item do you want to edit?"
-txt_edit_prompt_value = "Enter new text: "
-txt_edit_success = 'Item "{0}" has been replaced by "{1}".'
-txt_complete_prompt = "Which item do you want to complete?"
-txt_complete_success = 'Item "{0}" has been removed.'
-txt_exit = "To do list has been saved. Bye!"
-txt_error_invalid_action = "Unknown command."
-txt_error_empty_string = "You entered an empty string."
-txt_error_not_number = 'The value "{0}" is not a number.'
-txt_error_not_item = 'There\'s no item with number "{0}" in the list.'
 
 # Logic
 print("\n" + time.strftime("%A, %B %d %Y"))
 
 try:
     todo_list = get_todo_list()
-    print("\n" + app_title)
+    print("\n" + txt.app_title)
     display_todo_list(todo_list)
 except FileNotFoundError:
     todo_list = []
 
 while True:
     print()
-    user_input = input(txt_action_prompt + " ")
+    user_input = input(txt.action_prompt + " ")
     user_input = user_input.strip().partition(" ")
 
     user_action = user_input[0].casefold()
@@ -40,45 +23,45 @@ while True:
 
     match user_action:
         case "add":
-            todo_item = user_data if user_data else input(txt_add_prompt + " ")
+            todo_item = user_data if user_data else input(txt.add_prompt + " ")
             todo_item = todo_item.strip().title()
 
             if not todo_item:
-                print(txt_error_empty_string)
+                print(txt.error_empty_string)
                 continue
 
             todo_list.append(todo_item)
 
             save_todo_list(todo_list)
 
-            print(txt_add_success.format(todo_item))
+            print(txt.add_success.format(todo_item))
 
         case "show":
             if user_data:
-                print(txt_error_invalid_action)
+                print(txt.error_invalid_action)
                 continue
 
             display_todo_list(todo_list)
 
         case "edit":
-            index = user_data if user_data else input(txt_edit_prompt_index + " ")
+            index = user_data if user_data else input(txt.edit_prompt_index + " ")
 
             try:
                 index = int(index) - 1
             except ValueError:
-                print(txt_error_not_number.format(index))
+                print(txt.error_not_number.format(index))
                 continue
 
             if index < 0 or index > len(todo_list):
-                print(txt_error_not_item.format(index + 1))
+                print(txt.error_not_item.format(index + 1))
                 continue
 
             old_item = todo_list[index]
-            todo_item = input(txt_edit_prompt_value + " ")
+            todo_item = input(txt.edit_prompt_value + " ")
             todo_item = todo_item.strip().title()
 
             if not todo_item:
-                print(txt_error_empty_string)
+                print(txt.error_empty_string)
                 continue
 
             todo_list[index] = todo_item
@@ -87,34 +70,34 @@ while True:
 
             save_todo_list(todo_list)
 
-            print(txt_edit_success.format(old_item, new_item))
+            print(txt.edit_success.format(old_item, new_item))
 
         case "complete":
-            index = user_data if user_data else input(txt_complete_prompt + " ")
+            index = user_data if user_data else input(txt.complete_prompt + " ")
 
             try:
                 index = int(index) - 1
             except ValueError:
-                print(txt_error_not_number.format(index))
+                print(txt.error_not_number.format(index))
                 continue
 
             if index < 0 or index > len(todo_list):
-                print(txt_error_not_item.format(index + 1))
+                print(txt.error_not_item.format(index + 1))
                 continue
 
             todo_item = todo_list.pop(index)
 
             save_todo_list(todo_list)
 
-            print(txt_complete_success.format(todo_item))
+            print(txt.complete_success.format(todo_item))
 
         case "exit":
             if user_data:
-                print(txt_error_invalid_action)
+                print(txt.error_invalid_action)
                 continue
 
-            print(txt_exit)
+            print(txt.close)
             break
 
         case _:
-            print(txt_error_invalid_action)
+            print(txt.error_invalid_action)

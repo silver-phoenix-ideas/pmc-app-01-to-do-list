@@ -1,0 +1,14 @@
+app_title = "To Do List"
+action_prompt = "Type add, show, edit, complete or exit:"
+add_prompt = "Enter new item:"
+add_success = 'Item "{0}" has been added.'
+edit_prompt_index = "Which item do you want to edit?"
+edit_prompt_value = "Enter new text: "
+edit_success = 'Item "{0}" has been replaced by "{1}".'
+complete_prompt = "Which item do you want to complete?"
+complete_success = 'Item "{0}" has been removed.'
+close = "To do list has been saved. Bye!"
+error_invalid_action = "Unknown command."
+error_empty_string = "You entered an empty string."
+error_not_number = 'The value "{0}" is not a number.'
+error_not_item = 'There\'s no item with number "{0}" in the list.'
