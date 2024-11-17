@@ -1,15 +1,15 @@
 # Imports
 import time
 import localization.texts as txt
-from modules.functions import get_todo_list, save_todo_list, display_todo_list
+import modules.functions as functions
 
 # Logic
 print("\n" + time.strftime("%A, %B %d %Y"))
 
 try:
-    todo_list = get_todo_list()
+    todo_list = functions.get_todo_list()
     print("\n" + txt.app_title)
-    display_todo_list(todo_list)
+    functions.display_todo_list(todo_list)
 except FileNotFoundError:
     todo_list = []
 
@@ -32,7 +32,7 @@ while True:
 
             todo_list.append(todo_item)
 
-            save_todo_list(todo_list)
+            functions.save_todo_list(todo_list)
 
             print(txt.add_success.format(todo_item))
 
@@ -41,7 +41,7 @@ while True:
                 print(txt.error_invalid_action)
                 continue
 
-            display_todo_list(todo_list)
+            functions.display_todo_list(todo_list)
 
         case "edit":
             index = user_data if user_data else input(txt.edit_prompt_index + " ")
@@ -68,7 +68,7 @@ while True:
 
             new_item = todo_list[index]
 
-            save_todo_list(todo_list)
+            functions.save_todo_list(todo_list)
 
             print(txt.edit_success.format(old_item, new_item))
 
@@ -87,7 +87,7 @@ while True:
 
             todo_item = todo_list.pop(index)
 
-            save_todo_list(todo_list)
+            functions.save_todo_list(todo_list)
 
             print(txt.complete_success.format(todo_item))
 
