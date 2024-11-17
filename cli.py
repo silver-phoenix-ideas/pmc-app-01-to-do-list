@@ -30,8 +30,8 @@ while True:
                 print(txt.error_empty_string)
                 continue
 
+            todo_list = functions.get_todo_list()
             todo_list.append(todo_item)
-
             functions.save_todo_list(todo_list)
 
             print(txt.add_success.format(todo_item))
@@ -41,6 +41,7 @@ while True:
                 print(txt.error_invalid_action)
                 continue
 
+            todo_list = functions.get_todo_list()
             functions.display_todo_list(todo_list)
 
         case "edit":
@@ -51,6 +52,8 @@ while True:
             except ValueError:
                 print(txt.error_not_number.format(index))
                 continue
+
+            todo_list = functions.get_todo_list()
 
             if index < 0 or index > len(todo_list):
                 print(txt.error_not_item.format(index + 1))
@@ -80,6 +83,8 @@ while True:
             except ValueError:
                 print(txt.error_not_number.format(index))
                 continue
+
+            todo_list = functions.get_todo_list()
 
             if index < 0 or index > len(todo_list):
                 print(txt.error_not_item.format(index + 1))
