@@ -7,11 +7,16 @@ import modules.functions as functions
 label = fsg.Text(txt.add_prompt)
 input_field = fsg.Input(key="todo_item")
 add_button = fsg.Button(txt.add_button, key="add")
+todo_list_box = fsg.Listbox(
+    values=functions.get_todo_list(), key="todo_list",
+    enable_events=True, size=(45, 10)
+)
 
 # Layout
 layout = [
     [label],
-    [input_field, add_button]
+    [input_field, add_button],
+    [todo_list_box]
 ]
 
 # Window
@@ -27,8 +32,13 @@ while True:
 
             try:
                 todo_item = functions.add_todo_item(todo_item)
+                window["todo_item"].update(value="")
+                window["todo_list"].update(values=functions.get_todo_list())
             except ValueError as e:
                 pass
+
+        case "todo_list":
+            window["todo_item"].update(value=data["todo_list"][0])
 
         case fsg.WINDOW_CLOSED:
             break
