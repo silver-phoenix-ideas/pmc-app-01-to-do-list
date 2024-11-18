@@ -24,17 +24,12 @@ while True:
     match user_action:
         case "add":
             todo_item = user_data if user_data else input(txt.add_prompt + " ")
-            todo_item = todo_item.strip().title()
 
-            if not todo_item:
-                print(txt.error_empty_string)
-                continue
-
-            todo_list = functions.get_todo_list()
-            todo_list.append(todo_item)
-            functions.save_todo_list(todo_list)
-
-            print(txt.add_success.format(todo_item))
+            try:
+                todo_item = functions.add_todo_item(todo_item)
+                print(txt.add_success.format(todo_item))
+            except ValueError as e:
+                print(e)
 
         case "show":
             if user_data:

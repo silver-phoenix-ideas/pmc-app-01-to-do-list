@@ -1,4 +1,5 @@
 import configuration.config as config
+import localization.texts as txt
 
 
 def get_todo_list(filename: str = config.FILENAME):
@@ -18,6 +19,23 @@ def display_todo_list(todo_list: list):
     """ Prints out to-do list items and their numbers in the console. """
     for index, todo_item in enumerate(todo_list, start=1):
         print(index, "-", todo_item)
+
+
+def add_todo_item(todo_item: str):
+    """
+    Formats and validates the to-do item. If valid, it is added to the end
+    of the to-do list and the formatted to-do item is returned.
+    """
+    todo_item = todo_item.strip().title()
+
+    if not todo_item:
+        raise ValueError(txt.error_empty_string)
+
+    todo_list = get_todo_list()
+    todo_list.append(todo_item)
+    save_todo_list(todo_list)
+
+    return todo_item
 
 
 if __name__ == "__main__":
