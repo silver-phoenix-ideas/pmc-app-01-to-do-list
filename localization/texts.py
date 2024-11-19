@@ -3,6 +3,7 @@ action_prompt = "Type add, show, edit, complete or exit:"
 add_button = "Add"
 add_prompt = "Enter new item:"
 add_success = 'Item "{0}" has been added.'
+edit_button = "Edit"
 edit_prompt_index = "Which item do you want to edit?"
 edit_prompt_value = "Enter new text: "
 edit_success = 'Item "{0}" has been replaced by "{1}".'

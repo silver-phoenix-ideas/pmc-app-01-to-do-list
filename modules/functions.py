@@ -21,21 +21,41 @@ def display_todo_list(todo_list: list):
         print(index, "-", todo_item)
 
 
-def add_todo_item(todo_item: str):
+def parse_todo_item(todo_item: str):
     """
-    Formats and validates the to-do item. If valid, it is added to the end
-    of the to-do list and the formatted to-do item is returned.
+    Formats and validates the to-do item. If valid, the formatted
+    to-do item is returned. Otherwise, an exception is raised.
     """
     todo_item = todo_item.strip().title()
 
     if not todo_item:
         raise ValueError(txt.error_empty_string)
 
+    return todo_item
+
+
+def add_todo_item(todo_item: str):
+    """
+    Adds the to-do item to the end of the to-do list.
+    """
+    todo_item = parse_todo_item(todo_item)
     todo_list = get_todo_list()
     todo_list.append(todo_item)
     save_todo_list(todo_list)
 
     return todo_item
+
+
+def edit_todo_item(index: int, todo_item: str):
+    """
+    Edits the to-do item at the given index by
+    overwriting its value with the one provided.
+    """
+    todo_item = parse_todo_item(todo_item)
+
+    todo_list = get_todo_list()
+    todo_list[index] = todo_item
+    save_todo_list(todo_list)
 
 
 if __name__ == "__main__":
