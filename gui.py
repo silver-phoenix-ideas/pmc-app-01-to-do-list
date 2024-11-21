@@ -61,7 +61,8 @@ window = fsg.Window(
 while True:
     event, data = window.read(1000)
 
-    window["clock"].update(value=time.strftime(txt.datetime_format))
+    if not window.was_closed():
+        window["clock"].update(value=time.strftime(txt.datetime_format))
 
     match event:
         case "add":
