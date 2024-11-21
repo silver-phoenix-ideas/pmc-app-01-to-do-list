@@ -7,42 +7,49 @@ import modules.functions as functions
 # Settings
 fsg.theme("DarkGrey9")
 fsg.set_options(font=("Helvetica", 12))
-max_width = 50
 button_size = 10
-pad = (5, 15)
+button_pad = (6, 15)
 popup_duration = 1
+background_color = "#36393F"
 
 # Widgets
-title = fsg.Text(txt.app_title, font=("Helvetica", 14, "bold"), pad=pad)
+title = fsg.Text(txt.app_title, font=("Helvetica", 14, "bold"), p=(5, 15))
 clock = fsg.Text(
     time.strftime(txt.datetime_format), key="clock", font=("Helvetica", 10)
 )
 todo_list_box = fsg.Listbox(
     values=functions.get_todo_list(), key="todo_list",
-    enable_events=True, no_scrollbar=True, size=(max_width, 10)
+    enable_events=True, no_scrollbar=True, s=(50, 10)
 )
 todo_item_field = fsg.Input(
-    key="todo_item", size=max_width, tooltip=txt.add_prompt
+    key="todo_item", s=40, tooltip=txt.add_prompt
 )
 add_button = fsg.Button(
-    txt.add_button, key="add", size=button_size, pad=pad
+    tooltip=txt.add_button, key="add", s=button_size, p=button_pad,
+    image_source="icons/add_359849_white.png", border_width=0,
+    button_color=background_color, mouseover_colors=background_color
 )
 edit_button = fsg.Button(
-    txt.edit_button, key="edit", size=button_size, pad=pad
+    tooltip=txt.edit_button, key="edit", s=button_size, p=button_pad,
+    image_source="icons/pencil_719496_white.png", border_width=0,
+    button_color=background_color, mouseover_colors=background_color
 )
 complete_button = fsg.Button(
-    txt.complete_button, key="complete", size=button_size, pad=pad
+    tooltip=txt.complete_button, key="complete", s=button_size, p=button_pad,
+    image_source="icons/trash-bin_3964085_white.png", border_width=0,
+    button_color=background_color, mouseover_colors=background_color
 )
 close_button = fsg.Button(
-    txt.close_button, key="close", size=button_size, pad=pad
+    tooltip=txt.close_button, key="close", s=button_size, p=button_pad,
+    image_source="icons/close_359577_white.png", border_width=0,
+    button_color=background_color, mouseover_colors=background_color
 )
 
 # Layout
 layout = [
-    [title, fsg.Push(), clock],
+    [title, fsg.Push(), clock, close_button],
     [todo_list_box],
-    [todo_item_field],
-    [add_button, edit_button, complete_button, fsg.Push(), close_button]
+    [todo_item_field, add_button, edit_button, complete_button]
 ]
 
 # Window
