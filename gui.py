@@ -44,10 +44,15 @@ while True:
                 window["todo_item"].update(value="")
                 window["todo_list"].update(values=functions.get_todo_list())
             except ValueError as e:
-                pass
+                fsg.popup_quick_message(txt.error_empty_string)
 
         case "edit":
-            old_item = data["todo_list"][0]
+            try:
+                old_item = data["todo_list"][0]
+            except IndexError:
+                fsg.popup_quick_message(txt.error_no_selected_item)
+                continue
+
             new_item = data["todo_item"]
 
             todo_list = functions.get_todo_list()
@@ -62,7 +67,12 @@ while True:
             window["todo_list"].update(values=functions.get_todo_list())
 
         case "complete":
-            todo_item = data["todo_list"][0]
+            try:
+                todo_item = data["todo_list"][0]
+            except IndexError:
+                fsg.popup_quick_message(txt.error_no_selected_item)
+                continue
+
             todo_list = functions.get_todo_list()
             todo_list.remove(todo_item)
             functions.save_todo_list(todo_list)

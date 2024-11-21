@@ -18,3 +18,4 @@ error_invalid_action = "Unknown command."
 error_empty_string = "You entered an empty string."
 error_not_number = 'The value "{0}" is not a number.'
 error_not_item = 'There\'s no item with number "{0}" in the list.'
+error_no_selected_item = "Please select an item first."
