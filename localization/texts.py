@@ -10,6 +10,7 @@ edit_success = 'Item "{0}" has been replaced by "{1}".'
 complete_button = "Complete"
 complete_prompt = "Which item do you want to complete?"
 complete_success = 'Item "{0}" has been removed.'
+close_button = "Close"
 close = "To do list has been saved. Bye!"
 error_invalid_action = "Unknown command."
 error_empty_string = "You entered an empty string."

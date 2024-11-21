@@ -13,12 +13,14 @@ todo_list_box = fsg.Listbox(
 )
 edit_button = fsg.Button(txt.edit_button, key="edit")
 complete_button = fsg.Button(txt.complete_button, key="complete")
+close_button = fsg.Button(txt.close_button, key="close")
 
 # Layout
 layout = [
     [label],
     [input_field, add_button],
-    [todo_list_box, edit_button, complete_button]
+    [todo_list_box, edit_button, complete_button],
+    [close_button]
 ]
 
 # Window
@@ -65,7 +67,7 @@ while True:
         case "todo_list":
             window["todo_item"].update(value=data["todo_list"][0])
 
-        case fsg.WINDOW_CLOSED:
+        case "close" | fsg.WINDOW_CLOSED:
             break
 
 window.close()
