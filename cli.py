@@ -4,7 +4,7 @@ import localization.texts as txt
 import modules.functions as functions
 
 # Logic
-print("\n" + time.strftime("%A, %B %d %Y"))
+print("\n" + time.strftime(txt.date_format))
 
 try:
     todo_list = functions.get_todo_list()

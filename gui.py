@@ -1,9 +1,11 @@
 # Imports
+import time
 import FreeSimpleGUI as fsg
 import localization.texts as txt
 import modules.functions as functions
 
 # Widgets
+clock = fsg.Text(time.strftime(txt.datetime_format), key="clock")
 label = fsg.Text(txt.add_prompt)
 input_field = fsg.Input(key="todo_item")
 add_button = fsg.Button(txt.add_button, key="add")
@@ -17,6 +19,7 @@ close_button = fsg.Button(txt.close_button, key="close")
 
 # Layout
 layout = [
+    [clock],
     [label],
     [input_field, add_button],
     [todo_list_box, edit_button, complete_button],
@@ -28,8 +31,10 @@ window = fsg.Window(txt.app_title, layout=layout, font=("Helvetica", 12))
 
 # Logic
 while True:
-    event, data = window.read()
-    print(data)
+    event, data = window.read(1000)
+
+    window["clock"].update(value=time.strftime(txt.datetime_format))
+
     match event:
         case "add":
             todo_item = data["todo_item"]

@@ -1,4 +1,6 @@
 app_title = "To Do List"
+date_format = "%A, %B %d %Y"
+datetime_format = "%A, %B %d %Y - %H:%M:%S"
 action_prompt = "Type add, show, edit, complete or exit:"
 add_button = "Add"
 add_prompt = "Enter new item:"
