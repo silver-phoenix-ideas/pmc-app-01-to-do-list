@@ -12,12 +12,13 @@ todo_list_box = fsg.Listbox(
     enable_events=True, size=(45, 10)
 )
 edit_button = fsg.Button(txt.edit_button, key="edit")
+complete_button = fsg.Button(txt.complete_button, key="complete")
 
 # Layout
 layout = [
     [label],
     [input_field, add_button],
-    [todo_list_box, edit_button]
+    [todo_list_box, edit_button, complete_button]
 ]
 
 # Window
@@ -52,6 +53,14 @@ while True:
 
             window["todo_item"].update(value="")
             window["todo_list"].update(values=functions.get_todo_list())
+
+        case "complete":
+            todo_item = data["todo_list"][0]
+            todo_list = functions.get_todo_list()
+            todo_list.remove(todo_item)
+            functions.save_todo_list(todo_list)
+            window["todo_item"].update(value="")
+            window["todo_list"].update(values=todo_list)
 
         case "todo_list":
             window["todo_item"].update(value=data["todo_list"][0])

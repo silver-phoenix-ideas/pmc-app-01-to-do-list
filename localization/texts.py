@@ -7,6 +7,7 @@ edit_button = "Edit"
 edit_prompt_index = "Which item do you want to edit?"
 edit_prompt_value = "Enter new text: "
 edit_success = 'Item "{0}" has been replaced by "{1}".'
+complete_button = "Complete"
 complete_prompt = "Which item do you want to complete?"
 complete_success = 'Item "{0}" has been removed.'
 close = "To do list has been saved. Bye!"
