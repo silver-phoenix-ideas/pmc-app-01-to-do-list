@@ -5,13 +5,9 @@ import modules.functions as functions
 
 # Logic
 print("\n" + time.strftime(txt.date_format))
-
-try:
-    todo_list = functions.get_todo_list()
-    print("\n" + txt.app_title)
-    functions.display_todo_list(todo_list)
-except FileNotFoundError:
-    todo_list = []
+print("\n" + txt.app_title)
+todo_list = functions.get_todo_list()
+functions.display_todo_list(todo_list)
 
 while True:
     print()

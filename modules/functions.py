@@ -1,17 +1,31 @@
+import os
+import pathlib
 import configuration.config as config
 import localization.texts as txt
 
 
 def get_todo_list(filename: str = config.FILENAME):
     """ Reads the contents of a text file and returns a to-do list. """
-    with open("files/" + filename) as file:
-        todo_list = file.read().split("\n")
+    filepath = pathlib.Path(config.FILE_DIRECTORY, config.FILENAME)
+    todo_list = []
+
+    if os.path.exists(filepath):
+        with open(filepath) as file:
+            todo_list = file.read().split("\n")
+    else:
+        with open(filepath, "w") as file:
+            pass
+
+    todo_list = list(filter(None, todo_list))
+
     return todo_list
 
 
 def save_todo_list(todo_list: list, filename: str = config.FILENAME):
     """ Saves the contents of a to-do list in a text file. """
-    with open("files/" + filename, 'w') as file:
+    filepath = pathlib.Path(config.FILE_DIRECTORY, config.FILENAME)
+
+    with open(filepath, 'w') as file:
         file.write("\n".join(todo_list))
 
 
