@@ -73,7 +73,12 @@ def edit_todo_item(index: int, todo_item: str):
 
 
 if __name__ == "__main__":
-    print("Functions Module:")
-    help(get_todo_list)
-    help(save_todo_list)
-    help(display_todo_list)
+    current_module = pathlib.Path(__file__).stem.capitalize()
+    defined_functions = list(filter(callable, globals().values()))
+
+    print("\n" + current_module + " Module:")
+
+    for defined_function in defined_functions:
+        print()
+        help(defined_function)
+        print("-" * 80)
