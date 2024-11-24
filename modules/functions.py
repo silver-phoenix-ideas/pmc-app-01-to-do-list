@@ -4,8 +4,17 @@ import configuration.config as config
 import localization.texts as txt
 
 
+def get_data_path(relative_path: str):
+    """ Gets the absolute path to the resource. Needed for PyInstaller. """
+    app_root = pathlib.Path(__file__).parents[1]
+    resource_path = str(pathlib.Path(app_root, relative_path))
+
+    return resource_path
+
+
 def get_todo_list(filename: str = config.FILENAME):
     """ Reads the contents of a text file and returns a to-do list. """
+    pathlib.Path(config.FILE_DIRECTORY).mkdir(exist_ok=True)
     filepath = pathlib.Path(config.FILE_DIRECTORY, config.FILENAME)
     todo_list = []
 

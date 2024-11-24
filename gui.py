@@ -26,23 +26,27 @@ todo_item_field = fsg.Input(
 )
 add_button = fsg.Button(
     tooltip=txt.add_button, key="add", s=button_size, p=button_pad,
-    image_source="icons/add_359849_white.png", border_width=0,
-    button_color=background_color, mouseover_colors=background_color
+    image_source=functions.get_data_path("icons/add_359849_white.png"),
+    button_color=background_color, mouseover_colors=background_color,
+    border_width=0
 )
 edit_button = fsg.Button(
     tooltip=txt.edit_button, key="edit", s=button_size, p=button_pad,
-    image_source="icons/pencil_719496_white.png", border_width=0,
-    button_color=background_color, mouseover_colors=background_color
+    image_source=functions.get_data_path("icons/pencil_719496_white.png"),
+    button_color=background_color, mouseover_colors=background_color,
+    border_width=0
 )
 complete_button = fsg.Button(
     tooltip=txt.complete_button, key="complete", s=button_size, p=button_pad,
-    image_source="icons/trash-bin_3964085_white.png", border_width=0,
-    button_color=background_color, mouseover_colors=background_color
+    image_source=functions.get_data_path("icons/trash-bin_3964085_white.png"),
+    button_color=background_color, mouseover_colors=background_color,
+    border_width=0
 )
 close_button = fsg.Button(
     tooltip=txt.close_button, key="close", s=button_size, p=button_pad,
-    image_source="icons/close_359577_white.png", border_width=0,
-    button_color=background_color, mouseover_colors=background_color
+    image_source=functions.get_data_path("icons/close_359577_white.png"),
+    button_color=background_color, mouseover_colors=background_color,
+    border_width=0
 )
 
 # Layout
