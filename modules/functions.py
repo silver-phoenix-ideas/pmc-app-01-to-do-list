@@ -81,6 +81,13 @@ def edit_todo_item(index: int, todo_item: str):
     save_todo_list(todo_list)
 
 
+def remove_todo_item(index: int):
+    """ Removes the to-do item at the given index. """
+    todo_list = get_todo_list()
+    todo_list.pop(index)
+    save_todo_list(todo_list)
+
+
 if __name__ == "__main__":
     current_module = pathlib.Path(__file__).stem.capitalize()
     defined_functions = list(filter(callable, globals().values()))

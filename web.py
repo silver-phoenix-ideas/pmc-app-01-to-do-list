@@ -21,8 +21,10 @@ def main():
 
     st.title(txt.app_title)
 
-    for todo_item in todo_list:
-        st.checkbox(todo_item)
+    for index, todo_item in enumerate(todo_list):
+        if st.checkbox(todo_item):
+            functions.remove_todo_item(index)
+            st.rerun()
 
     st.text_input(
         label="", placeholder=txt.add_placeholder + "...",
