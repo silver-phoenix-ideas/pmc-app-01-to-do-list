@@ -29,7 +29,8 @@ def main():
             st.rerun()
 
     st.text_input(
-        label="", placeholder=txt.add_placeholder + "...",
+        label=txt.add_prompt, label_visibility="hidden",
+        placeholder=txt.add_placeholder + "...",
         key="todo_item", on_change=add_todo_item
     )
 
