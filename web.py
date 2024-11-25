@@ -1,4 +1,5 @@
 # Imports
+import time
 import streamlit as st
 import localization.texts as txt
 import modules.functions as functions
@@ -20,6 +21,7 @@ def main():
     todo_list = functions.get_todo_list()
 
     st.title(txt.app_title)
+    st.subheader(time.strftime(txt.date_format))
 
     for index, todo_item in enumerate(todo_list):
         if st.checkbox(todo_item):
